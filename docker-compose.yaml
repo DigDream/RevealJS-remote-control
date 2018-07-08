@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  nginx-server:
+    image: nginx:alpine
+    container_name: nginx-server-html
+    volumes:
+      - ./server:/usr/share/nginx/html:ro
+    ports:
+      - "8080:80"
+  nginx-client:
+    image: nginx:alpine
+    container_name: nginx-client-html
+    volumes:
+      - ./client-demo:/usr/share/nginx/html:ro
+    ports:
+      - "8081:80"
+  websocket:
+    image: reveal-js-remote-websocket-server
+    build: ./websocket
+    container_name: node-websocket-server
+    ports:
+      - "3000:3000"
